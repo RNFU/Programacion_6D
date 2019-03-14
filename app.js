@@ -121,3 +121,44 @@ emtr.on('greet', function(){
 
 console.log('Hello');
 emtr.emit('greet');
+
+//0312 Magic string
+var person = {
+  firstname: '', 
+  lastname: '',
+  greet: function(){
+    return this.firstname + ' ' + this.lastname;
+  }
+}
+
+var jose = Object.create(person);
+jose.firstname = 'jose';
+jose.lastname = 'perez';
+
+var ramon = Object.create(person);
+ramon.firstname = 'ramon';
+ramon.lastname = 'lopez';
+
+console.log(jose.greet());
+console.log(ramon.greet());
+//**********************************/
+var EventEmitter = require ('events');
+var util = require('util');
+
+function Greetr(){
+  this.greeting = 'Hola mundo';
+}
+
+util.inherits(Greetr, EventEmitter);
+
+Greetr.prototype.greet = function(){
+  console.log(this.greeting);
+  this.emit('greet');
+}
+
+var greeter1 = new Greetr();
+greeter1.on('greet', function(){
+  console.log('Alguien saludando');
+});
+
+greeter1.greet();
