@@ -1,3 +1,4 @@
+//0214
 // function satetement
 function greet(){
   console.log('Hola')
@@ -30,7 +31,7 @@ function Person(firstName, lastName){
   this.firstName = firstName;
   this.lastName = lastName;
 }
-
+//0219
 //Prototipo es un objeto especial al que todos los objetos a puntan
 //con la palara recervada protoipo a algo puedo agregar una propiedad extraque no esta establecida en su constructor
 Person.prototype.greet= function(){
@@ -70,7 +71,7 @@ var c = {};
 c.prop1 = {};
 changeObj(c);
 console.log(c);
-
+//0221
 //function values and methods
 var obj = {
   greet: 'Hello'
@@ -100,3 +101,23 @@ arr.push(function(){
 arr.forEach(function(item){
   item();
 });
+
+//0226
+//MODULES
+//app.js
+//var Emitter = require('./emitter.js'); Esta línea en teoria es lo mismo que la línea de abajo.
+var Emitter = require('events');
+var eventConfig = require('./config').events;
+
+var emtr = new Emitter();
+
+emtr.on(eventConfig.GREET, function(){
+  console.log('Hola');
+});
+
+emtr.on('greet', function(){
+  console.log('Hi');
+});
+
+console.log('Hello');
+emtr.emit('greet');
